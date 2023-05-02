@@ -1,5 +1,6 @@
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QApplication, QMainWindow, QMessageBox, QFileDialog
+from PySide6 import QtWidgets
+from PySide6.QtWidgets import QApplication, QMainWindow, QMessageBox, QFileDialog, QLabel
 
 from ui_main import Ui_MainWindow
 
@@ -17,9 +18,12 @@ class MainWindow (QMainWindow, Ui_MainWindow):
         self.searchFile.clicked.connect(self.search_button)
         self.browse.clicked.connect(self.browse_locations)
 
-        # self.searchFile.triggered.connect(self.search)
-      #   self.scanButton.triggered.connect(self.scan)
-      #   self.resultLabel
+        self.scanButton.clicked.connect(self.dialog_scan)
+        self.connectButton.clicked.connect(self.dialog_connect)
+        self.cekButton.clicked.connect(self.clicked)
+        
+        self.okButton.clicked.connect(self.exit)
+        # self.extractButton.clicked.connect(self.extract)
 
     def quit(self):
         self.app.quit()
@@ -33,7 +37,7 @@ class MainWindow (QMainWindow, Ui_MainWindow):
 
     def search_button(self):
         search = QFileDialog.getOpenFileName(
-            self, "Open File", "D:\Skripsi", "JPG files (*.jpg) ;; PNG files (*.png)" )
+            self, "Open File", "D:\Skripsi", "JPG files (*.jpg) ;; PNG files (*.png)")
         self.search.setText(search[0])
 
     def browse_locations(self):
@@ -41,55 +45,34 @@ class MainWindow (QMainWindow, Ui_MainWindow):
             self, "Save File", "D:\Skripsi\Data Raw Evidence")
         self.browseLocation.setText(browse[0])
 
-    # def search_button(self):
-    #     fileDialog = QtWidgets.QFileDialog(self)
-    #     fileDialog.setFileMode(QtWidgets.QFileDialog.ExistingFile)
-    #     fileDialog.setNameFilter("Text files (*.txt);;All files (*.*)")
-    #     if fileDialog.exec_():
-    #         selected_file = fileDialog.selectedFiles()[0]
-    #         print("Selected file:", selected_file)
+    def dialog_scan(self):
+        scan = QMessageBox.question(
+            self, "Scan Button", "Yakin ingin melakukan Scan Handphone Anda!!")
+        if scan == QMessageBox.Yes:
+            # message = QtWidgets.QLabel(self)
+            # self.message.setText('Anda Berhasil Terhubung..')
+            print("Yes")
+        else:
+            # self.message.setText('Anda Belum Terhubung..')
+            print("No")
 
-# import PySide6.QtCore as QtCore
-# import PySide6.QtGui as QtGui
-# import PySide6.QtWidgets as QtWidgets
+    def dialog_connect(self):
+        connect = QMessageBox.question(
+            self, "Connect Button", "Yakin ingin melakukan Connect Handphone Anda!!")
+        if connect == QMessageBox.Yes:
+            print("Yes")
+        else:
+            print("No")
 
-# class ScanDevice(QtWidgets.QDialog):
-#     def __init__(self, parent=None):
-#         super().__init__(parent)
- 
-#         # UI setup
-#         layout = QtWidgets.QVBoxLayout(self)
-#         self.textbox = QtWidgets.QLineEdit(self)
-#         self.textbox.setPlaceholderText('Insert device name')
-#         layout.addWidget(self.textbox)
-#         button = QtWidgets.QPushButton('Scan', self)
-#         button.clicked.connect(self.scan_device)
-#         layout.addWidget(button)
- 
-#     def scan_device(self):
-#         device_name = self.textbox.text()
- 
-#         # Scan for device
-#         device_found = False
-#         devices = QtCore.QBluetoothDeviceDiscoveryAgent()
-#         devices.deviceDiscovered.connect(lambda device: self.device_discovered(device, device_name))
-#         devices.start()
-#         devices.finished.connect(self.scan_finished)
- 
-#         # Show scanning progress
-#         self.progress = QtWidgets.QProgressBar(self)
-#         self.progress.setRange(0, 0)
-#         self.progress.setValue(0)
-#         self.progress.show()
- 
-#     def device_discovered(self, device_info, device_name):
-#         if device_info.name() == device_name:
-#             self.progress.close()
-#             self.textbox.clear()
-#             QtWidgets.QMessageBox.information(self, 'Device Found', f'{device_name} found at {device_info.address().toString()}')
-#             self.accept()
- 
-#     def scan_finished(self):
-#         self.progress.close()
-#         QtWidgets.QMessageBox.warning(self, 'Error', 'Device not found')
-#         self.reject()
+    def cek_button(self):
+        self.result = QtWidgets.QLabel(self)
+        self.result.setText("Not Root!")
+
+    def clicked(self):
+        self.result.setText("Root!")
+
+    def exit(self):
+        self.app.exit()
+
+
+    # def extract(self):

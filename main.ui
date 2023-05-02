@@ -18,7 +18,7 @@
     <property name="geometry">
      <rect>
       <x>560</x>
-      <y>80</y>
+      <y>20</y>
       <width>93</width>
       <height>28</height>
      </rect>
@@ -31,7 +31,7 @@
     <property name="geometry">
      <rect>
       <x>660</x>
-      <y>60</y>
+      <y>10</y>
       <width>93</width>
       <height>28</height>
      </rect>
@@ -44,7 +44,7 @@
     <property name="geometry">
      <rect>
       <x>660</x>
-      <y>100</y>
+      <y>50</y>
       <width>93</width>
       <height>28</height>
      </rect>
@@ -90,8 +90,8 @@
    <widget class="QGroupBox" name="destinationFile">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>130</y>
+      <x>220</x>
+      <y>90</y>
       <width>511</width>
       <height>201</height>
      </rect>
@@ -266,8 +266,8 @@
    <widget class="QProgressBar" name="acquisitionBar">
     <property name="geometry">
      <rect>
-      <x>360</x>
-      <y>350</y>
+      <x>390</x>
+      <y>310</y>
       <width>241</width>
       <height>23</height>
      </rect>
@@ -280,7 +280,7 @@
     <property name="geometry">
      <rect>
       <x>220</x>
-      <y>350</y>
+      <y>310</y>
       <width>131</width>
       <height>16</height>
      </rect>
@@ -293,9 +293,9 @@
     <property name="geometry">
      <rect>
       <x>210</x>
-      <y>400</y>
+      <y>380</y>
       <width>401</width>
-      <height>151</height>
+      <height>171</height>
      </rect>
     </property>
     <property name="title">
@@ -307,7 +307,7 @@
        <x>10</x>
        <y>20</y>
        <width>381</width>
-       <height>121</height>
+       <height>141</height>
       </rect>
      </property>
     </widget>
@@ -316,7 +316,7 @@
     <property name="geometry">
      <rect>
       <x>220</x>
-      <y>50</y>
+      <y>20</y>
       <width>331</width>
       <height>22</height>
      </rect>
@@ -331,13 +331,65 @@
     <property name="geometry">
      <rect>
       <x>220</x>
-      <y>90</y>
+      <y>50</y>
       <width>55</width>
       <height>16</height>
      </rect>
     </property>
     <property name="text">
      <string>Result :</string>
+    </property>
+   </widget>
+   <widget class="QProgressBar" name="acquisitionBar_2">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>340</y>
+      <width>241</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="value">
+     <number>50</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Int">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>310</y>
+      <width>31</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Int :</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Ext">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>340</y>
+      <width>31</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Ext :</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="result">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>50</y>
+      <width>81</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Not checked</string>
     </property>
    </widget>
   </widget>
