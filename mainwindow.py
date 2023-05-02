@@ -2,7 +2,13 @@ from PySide6.QtCore import Qt
 from PySide6 import QtCore, QtGui, QtWidgets
 from PySide6.QtCore import (QCoreApplication, QPropertyAnimation, QDate, QDateTime, QMetaObject, QObject, QPoint, QRect, QSize, QTime, QUrl, Qt, QEvent)
 from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont, QFontDatabase, QIcon, QKeySequence, QLinearGradient, QPalette, QPainter, QPixmap, QRadialGradient)
-from PySide6.QtWidgets import QApplication, QMainWindow, QMessageBox, QFileDialog, QLabel, QGraphicsDropShadowEffect
+from PySide6.QtWidgets import QApplication, QMainWindow, QMessageBox, QFileDialog, QLabel, QGraphicsDropShadowEffect,QProgressBar
+import time
+
+from PIL import Image
+from pytesseract import pytesseract
+import enum
+
 
 from ui_main import Ui_MainWindow
 from splash_screen_ui import Ui_SplashScreen
@@ -26,6 +32,7 @@ class MainWindow (QMainWindow, Ui_MainWindow):
         self.cekButton.clicked.connect(self.clicked)
         
         self.okButton.clicked.connect(self.exit)
+        self.extractButton.clicked.connect(self.start)
         # self.extractButton.clicked.connect(self.extract)
 
     def quit(self):
@@ -76,6 +83,12 @@ class MainWindow (QMainWindow, Ui_MainWindow):
 
     def clicked(self):
         self.result.setText("Root!")
+
+    def start(self):
+        for i in range(101):
+            self.acquisitionBar.setValue(i)
+            time.sleep(0.03)
+            # QApplication.processEvents()
 
     def exit(self):
         self.app.exit()
@@ -182,3 +195,26 @@ class SplashScreen(QMainWindow):
 
         # APPLY STYLESHEET WITH NEW VALUES
         self.ui.circularProgress.setStyleSheet(newStylesheet)
+
+# class OS(enum.Enum):
+#     Mac = 0
+#     Windows = 1
+
+# class Language(enum.Enum):
+#     ENG = 'eng'
+#     IND = 'ind'
+
+# class ImageReader: 
+#     def __init__(self, os: OS):
+#         if os == OS.Mac:
+#             print('Running on: Mac\n')
+        
+#         if os == OS.Windows:
+#             windows_path = r'E:\Program Files\Tesseract-OCR\tesseract.exe'
+#             pytesseract.tesseract_cmd = windows_path
+#             print ('Running on: Windows\n')
+    
+#     def extract_text(self, image: str, lang: str) -> str:
+#         img = Image.open(image)
+#         extracted_text = pytesseract.image_to_string(img, lang=lang)
+#         return extracted_text
