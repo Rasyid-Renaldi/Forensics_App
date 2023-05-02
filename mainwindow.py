@@ -2,7 +2,7 @@ from PySide6.QtCore import Qt
 from PySide6 import QtCore, QtGui, QtWidgets
 from PySide6.QtCore import (QCoreApplication, QPropertyAnimation, QDate, QDateTime, QMetaObject, QObject, QPoint, QRect, QSize, QTime, QUrl, Qt, QEvent)
 from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont, QFontDatabase, QIcon, QKeySequence, QLinearGradient, QPalette, QPainter, QPixmap, QRadialGradient)
-from PySide6.QtWidgets import QApplication, QMainWindow, QMessageBox, QFileDialog, QLabel, QGraphicsDropShadowEffect,QProgressBar
+from PySide6.QtWidgets import QApplication, QMainWindow, QMessageBox, QFileDialog, QLabel, QGraphicsDropShadowEffect,QProgressBar, QComboBox
 import time
 
 from PIL import Image
@@ -57,28 +57,25 @@ class MainWindow (QMainWindow, Ui_MainWindow):
 
     def dialog_scan(self):
         scan = QMessageBox.question(
-            self, "Scan Button", "Yakin ingin melakukan Scan Handphone Anda!!")
+            self, "Scan Button", "Ingin melakukan Scan Handphone Anda!!")
         if scan == QMessageBox.Yes:
-            # message = QtWidgets.QLabel(self)
-            # self.message.setText('Anda Berhasil Terhubung..')
             self.circular_progress = SplashScreen()
             self.circular_progress.progress
             self.circular_progress.progressBarValue
-            # print("Yes")
         else:
             # self.message.setText('Anda Belum Terhubung..')
             print("No")
 
     def dialog_connect(self):
         connect = QMessageBox.question(
-            self, "Connect Button", "Yakin ingin melakukan Connect Handphone Anda!!")
+            self, "Connect Button", "Ingin melakukan Connect Handphone Anda!!")
         if connect == QMessageBox.Yes:
             print("Yes")
         else:
             print("No")
 
     def cek_button(self):
-        self.result = QtWidgets.QLabel(self)
+        self.result = QLabel(self)
         self.result.setText("Not Root!")
 
     def clicked(self):
