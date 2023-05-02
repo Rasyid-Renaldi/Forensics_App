@@ -115,12 +115,12 @@ class SplashScreen(QMainWindow):
         self.timer.start(20)
 
         ## SHOW ==> MAIN WINDOW
-        ########################################################################
+        ########################
         self.show()
         ## ==> END ##
 
     ## DEF TO LOANDING
-    ########################################################################
+    ####################
     def progress (self):
         global counter
         global jumper
