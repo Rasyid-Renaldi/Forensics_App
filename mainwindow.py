@@ -1,39 +1,43 @@
 from PySide6.QtCore import Qt
 from PySide6 import QtCore, QtGui, QtWidgets
-from PySide6.QtCore import (QCoreApplication, QPropertyAnimation, QDate, QDateTime, QMetaObject, QObject, QPoint, QRect, QSize, QTime, QUrl, Qt, QEvent)
-from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont, QFontDatabase, QIcon, QKeySequence, QLinearGradient, QPalette, QPainter, QPixmap, QRadialGradient)
-from PySide6.QtWidgets import QApplication, QMainWindow, QMessageBox, QFileDialog, QLabel, QGraphicsDropShadowEffect,QProgressBar, QComboBox
+from PySide6.QtCore import (QCoreApplication, QPropertyAnimation, QDate, QDateTime,
+                            QMetaObject, QObject, QPoint, QRect, QSize, QTime, QUrl, Qt, QEvent)
+from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont, QFontDatabase,
+                           QIcon, QKeySequence, QLinearGradient, QPalette, QPainter, QPixmap, QRadialGradient)
+from PySide6.QtWidgets import QApplication, QMainWindow, QMessageBox, QFileDialog, QLabel, QGraphicsDropShadowEffect, QProgressBar, QComboBox
 import time
+import os
+import pandas as pd
 
-from PIL import Image
-from pytesseract import pytesseract
-import enum
-
-
-from ui_main import Ui_MainWindow
+from main_ui import Ui_Aplikasi_Forensik
 from splash_screen_ui import Ui_SplashScreen
 
 
-class MainWindow (QMainWindow, Ui_MainWindow):
+class Aplikasi_Forensik (QMainWindow, Ui_Aplikasi_Forensik):
     def __init__(self, app):
         super().__init__()
         self.setupUi(self)
         self.app = app
+
+        self.detectDevice.currentIndexChanged.connect(self.dialog_connect)
 
         self.actionQuit.triggered.connect(self.quit)
         self.actionAbout_App.triggered.connect(self.about)
         self.actionAbout_QT.triggered.connect(self.aboutQt)
 
         self.searchFile.clicked.connect(self.search_button)
-        self.browse.clicked.connect(self.browse_locations)
+        self.browse.clicked.connect(self.save_locations)
 
         self.scanButton.clicked.connect(self.dialog_scan)
-        self.connectButton.clicked.connect(self.dialog_connect)
-        self.cekButton.clicked.connect(self.clicked)
-        
+        self.cekButton.clicked.connect(self.cek_button)
+
         self.okButton.clicked.connect(self.exit)
-        self.extractButton.clicked.connect(self.start)
-        # self.extractButton.clicked.connect(self.extract)
+        self.convertButton.clicked.connect(self.start)
+
+    def start(self):
+        for i in range(101):
+            self.acquisitionBar.setValue(i)
+            time.sleep(0.03)
 
     def quit(self):
         self.app.quit()
@@ -47,70 +51,84 @@ class MainWindow (QMainWindow, Ui_MainWindow):
 
     def search_button(self):
         search = QFileDialog.getOpenFileName(
-            self, "Open File", "D:\Skripsi", "JPG files (*.jpg) ;; PNG files (*.png)")
+            self, "Open File", "D:\Skripsi", "XLSX files (*.xlsx)")
         self.search.setText(search[0])
 
-    def browse_locations(self):
+    def save_locations(self):
         browse = QFileDialog.getSaveFileName(
             self, "Save File", "D:\Skripsi\Data Raw Evidence")
         self.browseLocation.setText(browse[0])
 
     def dialog_scan(self):
         scan = QMessageBox.question(
-            self, "Scan Button", "Ingin melakukan Scan Handphone Anda!!")
+            self, "Scan Button", "Ingin melakukan Scan Handphone Anda ?")
         if scan == QMessageBox.Yes:
-            self.circular_progress = SplashScreen()
-            self.circular_progress.progress
-            self.circular_progress.progressBarValue
+            self.circular = SplashScreen()
+            self.circular.progress
+            self.circular.progressBarValue
+            self.result.setText("Root!")
         else:
-            # self.message.setText('Anda Belum Terhubung..')
             print("No")
 
     def dialog_connect(self):
         connect = QMessageBox.question(
-            self, "Connect Button", "Ingin melakukan Connect Handphone Anda!!")
+            self, "Connect Button", "Ingin melakukan Connect Handphone Anda ?")
         if connect == QMessageBox.Yes:
-            print("Yes")
+            selected_item = self.detectDevice.currentText()
+            print(selected_item)
+            dlg = QMessageBox(self)
+            dlg.setText('Berhasil terkoneksi dengan perangkat')
+            btn = dlg.exec_()
+            if btn == QMessageBox.Ok:
+                print('OK')
         else:
             print("No")
 
     def cek_button(self):
-        self.result = QLabel(self)
-        self.result.setText("Not Root!")
+        dlg = QMessageBox()
+        dlg.setWindowTitle("Cek Button")
+        dlg.setText("Silakan lakukan scan handphone anda terlebih dahulu !")
+        dlg.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+        dlg.setDefaultButton(QMessageBox.No)
 
-    def clicked(self):
-        self.result.setText("Root!")
+        button_clicked = dlg.exec_()
+        if button_clicked == QMessageBox.Yes:
+            print("Ok")
+            # self.result.setText("Root!")
+        else:
+            self.result.setText("Not Root!")
+        # self.result = QLabel(self)
+        # self.result.setText("Not Root!")
 
-    def start(self):
-        for i in range(101):
-            self.acquisitionBar.setValue(i)
-            time.sleep(0.03)
-            # QApplication.processEvents()
+    # def clicked(self):
+    #     self.result.setText("Root!")
 
     def exit(self):
         self.app.exit()
 
-    # def extract(self):
 
 # GLOBALS
 counter = 0
 jumper = 10
 
-## ==> SPLASHSCREEN WINDOW
+# ==> SPLASHSCREEN WINDOW
+
+
 class SplashScreen(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
         self.ui = Ui_SplashScreen()
         self.ui.setupUi(self)
 
-        ## ==> SET INITIAL PROGRESS BAR TO (0) ZERO
+        # ==> SET INITIAL PROGRESS BAR TO (0) ZERO
         self.progressBarValue(0)
 
-        ## ==> REMOVE STANDARD TITLE BAR
-        self.setWindowFlags(QtCore.Qt.FramelessWindowHint) # Remove title bar
-        self.setAttribute(QtCore.Qt.WA_TranslucentBackground) # Set background to transparent
+        # ==> REMOVE STANDARD TITLE BAR
+        self.setWindowFlags(QtCore.Qt.FramelessWindowHint)  # Remove title bar
+        # Set background to transparent
+        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
 
-        ## ==> APPLY DROP SHADOW EFFECT
+        # ==> APPLY DROP SHADOW EFFECT
         self.shadow = QGraphicsDropShadowEffect(self)
         self.shadow.setBlurRadius(20)
         self.shadow.setXOffset(0)
@@ -118,20 +136,20 @@ class SplashScreen(QMainWindow):
         self.shadow.setColor(QColor(0, 0, 0, 120))
         self.ui.circularBg.setGraphicsEffect(self.shadow)
 
-        ## QTIMER ==> START
+        # QTIMER ==> START
         self.timer = QtCore.QTimer()
         self.timer.timeout.connect(self.progress)
         # TIMER IN MILLISECONDS
         self.timer.start(20)
 
-        ## SHOW ==> MAIN WINDOW
+        # SHOW ==> MAIN WINDOW
         ########################
         self.show()
         ## ==> END ##
 
-    ## DEF TO LOANDING
+    # DEF TO LOANDING
     ####################
-    def progress (self):
+    def progress(self):
         global counter
         global jumper
         value = counter
@@ -149,7 +167,8 @@ class SplashScreen(QMainWindow):
 
         # SET VALUE TO PROGRESS BAR
         # fix max value error if > than 100
-        if value >= 100: value = 1.000
+        if value >= 100:
+            value = 1.000
         self.progressBarValue(value)
 
         # CLOSE SPLASH SCREE AND OPEN APP
@@ -167,7 +186,7 @@ class SplashScreen(QMainWindow):
         # INCREASE COUNTER
         counter += 0.5
 
-    ## DEF PROGRESS BAR VALUE
+    # DEF PROGRESS BAR VALUE
     #########################
     def progressBarValue(self, value):
 
@@ -188,30 +207,8 @@ class SplashScreen(QMainWindow):
         stop_2 = str(progress)
 
         # SET VALUES TO NEW STYLESHEET
-        newStylesheet = styleSheet.replace("{STOP_1}", stop_1).replace("{STOP_2}", stop_2)
+        newStylesheet = styleSheet.replace(
+            "{STOP_1}", stop_1).replace("{STOP_2}", stop_2)
 
         # APPLY STYLESHEET WITH NEW VALUES
         self.ui.circularProgress.setStyleSheet(newStylesheet)
-
-# class OS(enum.Enum):
-#     Mac = 0
-#     Windows = 1
-
-# class Language(enum.Enum):
-#     ENG = 'eng'
-#     IND = 'ind'
-
-# class ImageReader: 
-#     def __init__(self, os: OS):
-#         if os == OS.Mac:
-#             print('Running on: Mac\n')
-        
-#         if os == OS.Windows:
-#             windows_path = r'E:\Program Files\Tesseract-OCR\tesseract.exe'
-#             pytesseract.tesseract_cmd = windows_path
-#             print ('Running on: Windows\n')
-    
-#     def extract_text(self, image: str, lang: str) -> str:
-#         img = Image.open(image)
-#         extracted_text = pytesseract.image_to_string(img, lang=lang)
-#         return extracted_text

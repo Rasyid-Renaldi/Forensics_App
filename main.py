@@ -1,8 +1,8 @@
 import sys
 from PySide6.QtWidgets import QApplication
-from mainwindow import MainWindow
+from mainwindow import Aplikasi_Forensik
 
 app = QApplication(sys.argv)
-w = MainWindow(app)
+w = Aplikasi_Forensik(app)
 w.show()
 app.exec()
