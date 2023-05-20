@@ -72,7 +72,8 @@ class Aplikasi_Forensik (QMainWindow, Ui_Aplikasi_Forensik):
 
     def dialog_connect(self):
         connect = QMessageBox.question(
-            self, "Connect Button", "Ingin melakukan Connect Handphone Anda ?")
+            self, "Connect Button", "Ingin melakukan Connect perangkat ini ?")
+        self.result.setText("Not Root!")
         if connect == QMessageBox.Yes:
             selected_item = self.detectDevice.currentText()
             print(selected_item)
@@ -94,14 +95,8 @@ class Aplikasi_Forensik (QMainWindow, Ui_Aplikasi_Forensik):
         button_clicked = dlg.exec_()
         if button_clicked == QMessageBox.Yes:
             print("Ok")
-            # self.result.setText("Root!")
         else:
             self.result.setText("Not Root!")
-        # self.result = QLabel(self)
-        # self.result.setText("Not Root!")
-
-    # def clicked(self):
-    #     self.result.setText("Root!")
 
     def exit(self):
         self.app.exit()
@@ -113,6 +108,9 @@ jumper = 10
 
 # ==> SPLASHSCREEN WINDOW
 
+# untuk kebutuhan pada saat demo ketika sidang nanti
+# if selected_item == self.result.setText("Root"):
+            #     print("Telah root")
 
 class SplashScreen(QMainWindow):
     def __init__(self):
