@@ -19,8 +19,8 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
 from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QGroupBox,
     QLabel, QLineEdit, QListView, QMainWindow,
     QMenu, QMenuBar, QProgressBar, QPushButton,
-    QRadioButton, QSizePolicy, QStatusBar, QTextBrowser,
-    QToolButton, QWidget)
+    QRadioButton, QSizePolicy, QStatusBar, QToolButton,
+    QWidget)
 import resource_rc
 
 class Ui_Aplikasi_Forensik(object):
@@ -86,9 +86,6 @@ class Ui_Aplikasi_Forensik(object):
         self.searchFile.setObjectName(u"searchFile")
         self.searchFile.setGeometry(QRect(383, 24, 27, 22))
         self.searchFile.setPopupMode(QToolButton.InstantPopup)
-        self.search = QTextBrowser(self.destinationFile)
-        self.search.setObjectName(u"search")
-        self.search.setGeometry(QRect(119, 20, 241, 31))
         self.raw = QRadioButton(self.destinationFile)
         self.raw.setObjectName(u"raw")
         self.raw.setGeometry(QRect(110, 60, 101, 16))
@@ -113,6 +110,9 @@ class Ui_Aplikasi_Forensik(object):
         self.lineEdit = QLineEdit(self.destinationFile)
         self.lineEdit.setObjectName(u"lineEdit")
         self.lineEdit.setGeometry(QRect(120, 100, 241, 31))
+        self.search = QLineEdit(self.destinationFile)
+        self.search.setObjectName(u"search")
+        self.search.setGeometry(QRect(120, 20, 241, 31))
         self.acquisitionBar = QProgressBar(self.centralwidget)
         self.acquisitionBar.setObjectName(u"acquisitionBar")
         self.acquisitionBar.setGeometry(QRect(390, 310, 241, 23))

@@ -8,6 +8,8 @@ from PySide6.QtWidgets import QApplication, QMainWindow, QMessageBox, QFileDialo
 import time
 import os
 import pandas as pd
+from PIL import Image
+from openpyxl import Workbook
 
 from main_ui import Ui_Aplikasi_Forensik
 from splash_screen_ui import Ui_SplashScreen
@@ -20,6 +22,7 @@ class Aplikasi_Forensik (QMainWindow, Ui_Aplikasi_Forensik):
         self.app = app
 
         self.detectDevice.currentIndexChanged.connect(self.dialog_connect)
+        self.convertButton.clicked.connect(self.convert_image_to_excel)
 
         self.actionQuit.triggered.connect(self.quit)
         self.actionAbout_App.triggered.connect(self.about)
@@ -38,7 +41,52 @@ class Aplikasi_Forensik (QMainWindow, Ui_Aplikasi_Forensik):
         for i in range(101):
             self.acquisitionBar.setValue(i)
             time.sleep(0.03)
+    
+    def convert_image_to_excel(self):
+        image_path = self.search.text()
+        excel_path = self.browseLocation.text()
 
+        if image_path and excel_path:
+            image = Image.open(image_path)
+
+            workbook = Workbook()
+            sheet = workbook.active
+
+            max_image_width = sheet.column_dimensions['A'].width
+            max_image_height = sheet.row_dimensions[1].height
+
+            default_width = 100  # Nilai lebar default
+            default_height = 100  # Nilai tinggi default
+
+            try:
+                if max_image_width is not None:
+                    max_image_width = int(max_image_width)
+                else:
+                    max_image_width = default_width
+
+                if max_image_height is not None:
+                    max_image_height = int(max_image_height)
+                else:
+                    max_image_height = default_height
+
+                max_image_size = (max_image_width, max_image_height)
+                resized_image = image.resize(max_image_size)
+
+                # Add the image to the worksheet
+                image_cell = sheet.cell(row=1, column=1)
+                image_cell.value = "Image"
+                sheet.column_dimensions['A'].width = resized_image.width
+                sheet.row_dimensions[1].height = resized_image.height
+                sheet.add_image(resized_image, 'A2')
+
+                workbook.save(excel_path)
+        
+                QMessageBox.information(self, "Konversi Selesai", "Gambar berhasil dikonversi menjadi file Excel!")
+            except (ValueError, TypeError):
+                QMessageBox.warning(self, "Error", "Ukuran lebar atau tinggi gambar tidak valid!")
+        else:
+            QMessageBox.warning(self, "Error", "Mohon pilih file gambar dan lokasi penyimpanan terlebih dahulu!")
+        
     def quit(self):
         self.app.quit()
 
@@ -51,12 +99,12 @@ class Aplikasi_Forensik (QMainWindow, Ui_Aplikasi_Forensik):
 
     def search_button(self):
         search = QFileDialog.getOpenFileName(
-            self, "Open File", "D:\Skripsi", "XLSX files (*.xlsx)")
+            self, "Open File", "D:\Skripsi", ".JPG files (*.jpg)")
         self.search.setText(search[0])
 
     def save_locations(self):
         browse = QFileDialog.getSaveFileName(
-            self, "Save File", "D:\Skripsi\Data Raw Evidence")
+            self, "Save File", "D:\Skripsi\image")
         self.browseLocation.setText(browse[0])
 
     def dialog_scan(self):
