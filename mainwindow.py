@@ -22,7 +22,8 @@ class Aplikasi_Forensik (QMainWindow, Ui_Aplikasi_Forensik):
         self.app = app
 
         self.detectDevice.currentIndexChanged.connect(self.dialog_connect)
-        self.convertButton.clicked.connect(self.convert_image_to_excel)
+        self.convertButton.clicked.connect(self.start_convert_image)
+        # self.convertButton.clicked.connect(self.convert_image_to_excel)
 
         self.actionQuit.triggered.connect(self.quit)
         self.actionAbout_App.triggered.connect(self.about)
@@ -35,12 +36,22 @@ class Aplikasi_Forensik (QMainWindow, Ui_Aplikasi_Forensik):
         self.cekButton.clicked.connect(self.cek_button)
 
         self.okButton.clicked.connect(self.exit)
-        self.convertButton.clicked.connect(self.start)
+        # self.convertButton.clicked.connect(self.start)
 
-    def start(self):
-        for i in range(101):
-            self.acquisitionBar.setValue(i)
-            time.sleep(0.03)
+        # for i in range(101):
+        #     self.acquisitionBar.setValue(i)
+        #     time.sleep(0.03)
+
+    def start_convert_image(self):
+        self.convertButton.setEnabled(False)
+
+        animation = QPropertyAnimation(self.acquisitionBar, b"value")
+        animation.setDuration(3000)
+        animation.setStartValue(0)
+        animation.setEndValue(100)
+        animation.start()
+
+        self.convert_image_to_excel()
     
     def convert_image_to_excel(self):
         image_path = self.search.text()
@@ -57,6 +68,7 @@ class Aplikasi_Forensik (QMainWindow, Ui_Aplikasi_Forensik):
 
             default_width = 100  # Nilai lebar default
             default_height = 100  # Nilai tinggi default
+            rel = None
 
             try:
                 if max_image_width is not None:
@@ -82,10 +94,14 @@ class Aplikasi_Forensik (QMainWindow, Ui_Aplikasi_Forensik):
                 workbook.save(excel_path)
         
                 QMessageBox.information(self, "Konversi Selesai", "Gambar berhasil dikonversi menjadi file Excel!")
-            except (ValueError, TypeError):
-                QMessageBox.warning(self, "Error", "Ukuran lebar atau tinggi gambar tidak valid!")
+            except (ValueError, TypeError) as e:
+                rel = str(e)
+            if rel is not None:
+                QMessageBox.warning(self, "Error", "Ukuran lebar atau tinggi gambar tidak valid!\n\n" + rel)
         else:
             QMessageBox.warning(self, "Error", "Mohon pilih file gambar dan lokasi penyimpanan terlebih dahulu!")
+        
+        self.convertButton.setEnabled(True)
         
     def quit(self):
         self.app.quit()
