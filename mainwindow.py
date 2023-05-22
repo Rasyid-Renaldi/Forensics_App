@@ -11,7 +11,6 @@ import os
 import pandas as pd
 from pytesseract import pytesseract
 from PIL import Image
-from openpyxl import Workbook
 
 from main_ui import Ui_Aplikasi_Forensik
 from splash_screen_ui import Ui_SplashScreen
