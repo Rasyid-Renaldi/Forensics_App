@@ -58,7 +58,8 @@ class Aplikasi_Forensik (QMainWindow, Ui_Aplikasi_Forensik):
         self.add_activity("Path gambar: {}".format(self.search.text()))
         self.add_activity("Path penyimpanan: {}".format(self.text_file_path))
         self.add_activity("Nama examiner: {}".format(self.lineEdit.text()))
-        self.add_activity("Lokasi file output: {}".format(self.save_locations()))
+        self.add_activity(
+            "Lokasi file output: {}".format(self.save_locations()))
 
         animation = QPropertyAnimation(self.acquisitionBar, b"value")
         animation.setDuration(3000)
@@ -170,6 +171,7 @@ jumper = 10
 
 # ==> SPLASHSCREEN WINDOW
 
+
 class SplashScreen(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
@@ -280,41 +282,41 @@ class SplashScreen(QMainWindow):
 # self.convertButton.clicked.connect(self.start_convert_image)
 
  # workbook = Workbook()
-            # sheet = workbook.active
+        # sheet = workbook.active
 
-            # max_image_width = sheet.column_dimensions['A'].width
-            # max_image_height = sheet.row_dimensions[1].height
+        # max_image_width = sheet.column_dimensions['A'].width
+        # max_image_height = sheet.row_dimensions[1].height
 
-            # default_width = 100  # Nilai lebar default
-            # default_height = 100  # Nilai tinggi default
+        # default_width = 100  # Nilai lebar default
+        # default_height = 100  # Nilai tinggi default
 
-            # try:
-            #     if max_image_width is not None:
-            #         max_image_width = int(max_image_width)
-            #     else:
-            #         max_image_width = default_width
+        # try:
+        #     if max_image_width is not None:
+        #         max_image_width = int(max_image_width)
+        #     else:
+        #         max_image_width = default_width
 
-            #     if max_image_height is not None:
-            #         max_image_height = int(max_image_height)
-            #     else:
-            #         max_image_height = default_height
+        #     if max_image_height is not None:
+        #         max_image_height = int(max_image_height)
+        #     else:
+        #         max_image_height = default_height
 
-            #     max_image_size = (max_image_width, max_image_height)
-            #     resized_image = image.resize(max_image_size)
+        #     max_image_size = (max_image_width, max_image_height)
+        #     resized_image = image.resize(max_image_size)
 
-            #     image_cell = sheet.cell(row=1, column=1)
-            #     image_cell.value = "Image"
-            #     sheet.column_dimensions['A'].width = resized_image.width
-            #     sheet.row_dimensions[1].height = resized_image.height
-            #     sheet.add_image(resized_image, 'A4')
+        #     image_cell = sheet.cell(row=1, column=1)
+        #     image_cell.value = "Image"
+        #     sheet.column_dimensions['A'].width = resized_image.width
+        #     sheet.row_dimensions[1].height = resized_image.height
+        #     sheet.add_image(resized_image, 'A4')
 
-            #     text_cell = sheet.cell(row=2, column=1)
-            #     text_cell.value = extracted_text
+        #     text_cell = sheet.cell(row=2, column=1)
+        #     text_cell.value = extracted_text
 
-            #     workbook.save(excel_path)
+        #     workbook.save(excel_path)
 
-            #     QMessageBox.information(
-            #         self, "Konversi Selesai", "Gambar berhasil dikonversi menjadi file Excel!")
-            # except (ValueError, TypeError) as e:
-            #     QMessageBox.warning(
-            #         self, "Error", "Ukuran lebar atau tinggi gambar tidak valid!\n\n{str(e)}")
+        #     QMessageBox.information(
+        #         self, "Konversi Selesai", "Gambar berhasil dikonversi menjadi file Excel!")
+        # except (ValueError, TypeError) as e:
+        #     QMessageBox.warning(
+        #         self, "Error", "Ukuran lebar atau tinggi gambar tidak valid!\n\n{str(e)}")
