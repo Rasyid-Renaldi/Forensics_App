@@ -67,7 +67,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Convert</string>
+     <string>Extract</string>
     </property>
     <property name="icon">
      <iconset resource="resource.qrc">
