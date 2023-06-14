@@ -4,7 +4,7 @@ from PySide6.QtCore import (QCoreApplication, QPropertyAnimation, QDate, QDateTi
                             QMetaObject, QObject, QPoint, QRect, QSize, QTime, QUrl, Qt, QEvent)
 from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont, QFontDatabase,
                            QIcon, QKeySequence, QLinearGradient, QPalette, QPainter, QPixmap, QRadialGradient)
-from PySide6.QtWidgets import QApplication, QMainWindow, QMessageBox, QFileDialog, QLabel, QGraphicsDropShadowEffect, QProgressBar, QComboBox, QListView
+from PySide6.QtWidgets import QApplication, QMainWindow, QMessageBox, QFileDialog, QLabel, QGraphicsDropShadowEffect, QRadioButton, QProgressBar, QComboBox, QListView, QRadioButton
 import time
 import enum
 import os
@@ -33,7 +33,6 @@ class Aplikasi_Forensik (QMainWindow, Ui_Aplikasi_Forensik):
         self.text_file_path = None
 
         self.detectDevice.currentIndexChanged.connect(self.dialog_connect)
-        # self.convertButton.clicked.connect(self.convert_image_to_excel)
         self.convertButton.clicked.connect(self.start_convert_image)
 
         self.actionQuit.triggered.connect(self.quit)
@@ -42,6 +41,7 @@ class Aplikasi_Forensik (QMainWindow, Ui_Aplikasi_Forensik):
 
         self.searchFile.clicked.connect(self.search_button)
         self.browse.clicked.connect(self.save_locations)
+        # self.text.clicked.connect(lambda: self.radio_button)
 
         self.scanButton.clicked.connect(self.dialog_scan)
         self.cekButton.clicked.connect(self.cek_button)
@@ -54,12 +54,12 @@ class Aplikasi_Forensik (QMainWindow, Ui_Aplikasi_Forensik):
     def start_convert_image(self):
         self.convertButton.setEnabled(False)
 
-        self.add_activity("Mengubah gambar menjadi teks")
+        self.add_activity("======= Mengubah gambar menjadi teks =======")
         self.add_activity("Path gambar: {}".format(self.search.text()))
         self.add_activity("Path penyimpanan: {}".format(self.text_file_path))
         self.add_activity("Nama examiner: {}".format(self.lineEdit.text()))
         self.add_activity(
-            "Lokasi file output: {}".format(self.save_locations()))
+            "Lokasi file output: {}".format(self.text_file_path))
 
         animation = QPropertyAnimation(self.acquisitionBar, b"value")
         animation.setDuration(3000)
@@ -102,6 +102,12 @@ class Aplikasi_Forensik (QMainWindow, Ui_Aplikasi_Forensik):
 
     def aboutQt(self):
         QApplication.aboutQt()
+    
+    # def radio_button(self):
+    #     text = QRadioButton()
+    #     text.setChecked(True)
+    #     if text.isChecked == True:
+    #         self.add_activity("File type: {}".format(text[0]))
 
     def search_button(self):
         search = QFileDialog.getOpenFileName(
@@ -125,10 +131,16 @@ class Aplikasi_Forensik (QMainWindow, Ui_Aplikasi_Forensik):
         scan = QMessageBox.question(
             self, "Scan Button", "Ingin melakukan Scan Handphone Anda ?")
         if scan == QMessageBox.Yes:
+            selected_item = self.detectDevice.currentText()
             self.circular = SplashScreen()
             self.circular.progress
             self.circular.progressBarValue
-            self.result.setText("Root!")
+
+            if selected_item == self.detectDevice.itemText(2):
+                self.result.setText("Not Root!")  
+            else:
+                selected_item = self.detectDevice.currentText()       
+                self.result.setText("Root!")
         else:
             print("No")
 
@@ -205,7 +217,7 @@ class SplashScreen(QMainWindow):
         self.show()
         ## ==> END ##
 
-    # DEF TO LOANDING
+    # DEF TO LOADING
     ####################
     def progress(self):
         global counter
