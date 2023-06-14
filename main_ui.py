@@ -160,7 +160,7 @@ class Ui_Aplikasi_Forensik(object):
     # setupUi
 
     def retranslateUi(self, Aplikasi_Forensik):
-        Aplikasi_Forensik.setWindowTitle(QCoreApplication.translate("Aplikasi_Forensik", u"MainWindow", None))
+        Aplikasi_Forensik.setWindowTitle(QCoreApplication.translate("Aplikasi_Forensik", u"Aplikasi_Forensik", None))
         self.actionSave.setText(QCoreApplication.translate("Aplikasi_Forensik", u"Save", None))
         self.actionSave_As.setText(QCoreApplication.translate("Aplikasi_Forensik", u"Save As", None))
         self.actionQuit.setText(QCoreApplication.translate("Aplikasi_Forensik", u"Quit", None))
