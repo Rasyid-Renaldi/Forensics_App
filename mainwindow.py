@@ -4,11 +4,8 @@ from PySide6.QtCore import (QCoreApplication, QPropertyAnimation, QDate, QDateTi
                             QMetaObject, QObject, QPoint, QRect, QSize, QTime, QUrl, Qt, QEvent)
 from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont, QFontDatabase,
                            QIcon, QKeySequence, QLinearGradient, QPalette, QPainter, QPixmap, QRadialGradient)
-from PySide6.QtWidgets import QApplication, QMainWindow, QMessageBox, QFileDialog, QLabel, QGraphicsDropShadowEffect, QRadioButton, QProgressBar, QComboBox, QListView, QRadioButton
-import time
+from PySide6.QtWidgets import QApplication, QMainWindow, QMessageBox, QFileDialog, QLabel, QGraphicsDropShadowEffect, QRadioButton, QProgressBar, QComboBox, QListView
 import enum
-import os
-import pandas as pd
 from pytesseract import pytesseract
 from PIL import Image
 
@@ -102,7 +99,7 @@ class Aplikasi_Forensik (QMainWindow, Ui_Aplikasi_Forensik):
 
     def aboutQt(self):
         QApplication.aboutQt()
-    
+
     # def radio_button(self):
     #     text = QRadioButton()
     #     text.setChecked(True)
@@ -129,7 +126,7 @@ class Aplikasi_Forensik (QMainWindow, Ui_Aplikasi_Forensik):
 
     def dialog_scan(self):
         scan = QMessageBox.question(
-            self, "Scan Button", "Ingin melakukan Scan Handphone Anda ?")
+            self, "Scan Smartphone", "Ingin melakukan Scan Handphone Anda ?")
         if scan == QMessageBox.Yes:
             selected_item = self.detectDevice.currentText()
             self.circular = SplashScreen()
@@ -137,16 +134,16 @@ class Aplikasi_Forensik (QMainWindow, Ui_Aplikasi_Forensik):
             self.circular.progressBarValue
 
             if selected_item == self.detectDevice.itemText(2):
-                self.result.setText("Not Root!")  
+                self.result.setText("Not Root!")
             else:
-                selected_item = self.detectDevice.currentText()       
+                selected_item = self.detectDevice.currentText()
                 self.result.setText("Root!")
         else:
             print("No")
 
     def dialog_connect(self):
         connect = QMessageBox.question(
-            self, "Connect Button", "Ingin melakukan Connect perangkat ini ?")
+            self, "Connect Smartphone", "Ingin melakukan Connect perangkat ini ?")
         self.result.setText("Not Root!")
         if connect == QMessageBox.Yes:
             selected_item = self.detectDevice.currentText()
@@ -161,8 +158,8 @@ class Aplikasi_Forensik (QMainWindow, Ui_Aplikasi_Forensik):
 
     def cek_button(self):
         dlg = QMessageBox()
-        dlg.setWindowTitle("Cek Button")
-        dlg.setText("Silakan lakukan scan handphone anda terlebih dahulu !")
+        dlg.setWindowTitle("Check Smartphone")
+        dlg.setText("Silakan lakukan scan Smartphone anda terlebih dahulu !")
         dlg.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
         dlg.setDefaultButton(QMessageBox.No)
 
