@@ -13,15 +13,15 @@ from main_ui import Ui_Aplikasi_Forensik
 from splash_screen_ui import Ui_SplashScreen
 
 
+#* Mendefinisikan kelas enumerasi OS (Operating System) yang memiliki satu anggota yaitu Windows dengan nilai 1
 class OS(enum.Enum):
     Windows = 1
 
-
+#* Mendefinisikan kelas enumerasi Language yang memiliki satu anggota yaitu IND dengan nilai 'ind'
 class Language(enum.Enum):
-    ENG = 'eng'
     IND = 'ind'
 
-
+#* class untuk menampung sinyal, slot dan fungsi yang berinteraksi dengan antarmuka
 class Aplikasi_Forensik (QMainWindow, Ui_Aplikasi_Forensik):
     def __init__(self, app):
         super().__init__()
@@ -38,37 +38,37 @@ class Aplikasi_Forensik (QMainWindow, Ui_Aplikasi_Forensik):
 
         self.searchFile.clicked.connect(self.search_button)
         self.browse.clicked.connect(self.save_locations)
-        # self.text.clicked.connect(lambda: self.radio_button)
 
         self.scanButton.clicked.connect(self.dialog_scan)
-        self.cekButton.clicked.connect(self.cek_button)
+        self.cekButton.clicked.connect(self.check_button)
 
         self.activity_model = QStringListModel()
         self.viewData.setModel(self.activity_model)
 
         self.okButton.clicked.connect(self.exit)
 
-    def start_convert_image(self):
-        self.convertButton.setEnabled(False)
+    #* Memanggil fungsi extract_image_to_text() dan Menambahkan kegiatan ke dalam model activity_model (keterangan)
+    #* Memulai animasi progressBar acquisitionBar dengan menggunakan QPropertyAnimation.
+    def start_extract_image(self):
+        self.extractButton.setEnabled(False)
 
         self.add_activity("======= Mengubah gambar menjadi teks =======")
         self.add_activity("Path gambar: {}".format(self.search.text()))
         self.add_activity("Path penyimpanan: {}".format(self.text_file_path))
         self.add_activity("Nama examiner: {}".format(self.lineEdit.text()))
-        self.add_activity(
-            "Lokasi file output: {}".format(self.text_file_path))
+        self.add_activity("Lokasi file output: {}".format(self.text_file_path))
 
         animation = QPropertyAnimation(self.acquisitionBar, b"value")
         animation.setDuration(3000)
         animation.setStartValue(0)
         animation.setEndValue(100)
-        # Menghubungkan ke fungsi convert_image_to_excel
-        animation.finished.connect(self.convert_image_to_text)
+        animation.finished.connect(self.extract_image_to_text)
         animation.start()
 
-        self.convert_image_to_text()
+        self.extract_image_to_text()
 
-    def convert_image_to_text(self):
+    #* Berfungsi untuk melakukan proses ekstrak teks dari gambar
+    def extract_image_to_text(self):
         image_path = self.search.text()
 
         if image_path and self.text_file_path:
@@ -88,30 +88,29 @@ class Aplikasi_Forensik (QMainWindow, Ui_Aplikasi_Forensik):
             QMessageBox.warning(
                 self, "Error", "Mohon pilih file gambar dan lokasi penyimpanan terlebih dahulu!")
 
-        self.convertButton.setEnabled(True)
+        self.extractButton.setEnabled(True)
 
+    #* Fungsi untuk keluar dari aplikasi
     def quit(self):
         self.app.quit()
 
+    #* Fungsi untuk menampilkan informasi tentang aplikasi
     def about(self):
         QMessageBox.information(
             self, "Aplikasi Forensik", "Aplikasi ini hanya bisa digunakan untuk kepentingan akuisisi data!")
 
+    #* Fungsi untuk menampilkan informasi tentang QT
     def aboutQt(self):
         QApplication.aboutQt()
 
-    # def radio_button(self):
-    #     text = QRadioButton()
-    #     text.setChecked(True)
-    #     if text.isChecked == True:
-    #         self.add_activity("File type: {}".format(text[0]))
-
+    #* Fungsi untuk membuka folder penyimpanan file image
     def search_button(self):
         search = QFileDialog.getOpenFileName(
             self, "Open File", "D:\Skripsi", "JPG files (*.jpg)")
         self.search.setText(search[0])
         self.add_activity("Path gambar: {}".format(search[0]))
 
+    #* Menentukan folder penyimpanan hasil extract file image
     def save_locations(self):
         selected_location = QFileDialog.getSaveFileName(
             self, "Save File", "D:\Skripsi", "TXT files (*.txt)")
@@ -119,11 +118,13 @@ class Aplikasi_Forensik (QMainWindow, Ui_Aplikasi_Forensik):
         self.text_file_path = selected_location[0]
         self.add_activity("Path penyimpanan: {}".format(selected_location[0]))
 
+    #* Fungsi untuk menambahkan keterangan
     def add_activity(self, activity):
         act = self.activity_model.stringList()
         act.append(activity)
         self.activity_model.setStringList(act)
 
+    #* Menentukan smartphone yang akan digunakan 
     def dialog_scan(self):
         scan = QMessageBox.question(
             self, "Scan Smartphone", "Ingin melakukan Scan Handphone Anda ?")
@@ -141,6 +142,7 @@ class Aplikasi_Forensik (QMainWindow, Ui_Aplikasi_Forensik):
         else:
             print("No")
 
+    #* Fungsi untuk koneksi smartphone dengan aplikasi forensik
     def dialog_connect(self):
         connect = QMessageBox.question(
             self, "Connect Smartphone", "Ingin melakukan Connect perangkat ini ?")
@@ -156,7 +158,8 @@ class Aplikasi_Forensik (QMainWindow, Ui_Aplikasi_Forensik):
         else:
             print("No")
 
-    def cek_button(self):
+    #* Fungsi cek smartphone agar dilakukan scan terlebih dahulu
+    def check_button(self):
         dlg = QMessageBox()
         dlg.setWindowTitle("Check Smartphone")
         dlg.setText("Silakan lakukan scan Smartphone anda terlebih dahulu !")
@@ -168,8 +171,8 @@ class Aplikasi_Forensik (QMainWindow, Ui_Aplikasi_Forensik):
             print("Ok")
         else:
             print("No")
-            # self.result.setText("Not Root!")
 
+    #* Fungsi keluar dari aplikasi
     def exit(self):
         self.app.exit()
 
@@ -279,3 +282,4 @@ class SplashScreen(QMainWindow):
 
         # APPLY STYLESHEET WITH NEW VALUES
         self.ui.circularProgress.setStyleSheet(newStylesheet)
+    # ENG = 'eng'

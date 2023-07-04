@@ -27,7 +27,7 @@
      <string>Scan</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="cekButton">
+   <widget class="QPushButton" name="checkButton">
     <property name="geometry">
      <rect>
       <x>410</x>
@@ -57,7 +57,7 @@
       <normaloff>:/images/images/checkIcon.png</normaloff>:/images/images/checkIcon.png</iconset>
     </property>
    </widget>
-   <widget class="QPushButton" name="convertButton">
+   <widget class="QPushButton" name="extractButton">
     <property name="geometry">
      <rect>
       <x>770</x>
