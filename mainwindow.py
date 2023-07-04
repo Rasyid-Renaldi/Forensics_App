@@ -30,9 +30,8 @@ class Aplikasi_Forensik (QMainWindow, Ui_Aplikasi_Forensik):
         self.text_file_path = None
 
         self.detectDevice.currentIndexChanged.connect(self.dialog_connect)
-        self.convertButton.clicked.connect(self.start_convert_image)
+        self.extractButton.clicked.connect(self.start_extract_image)
 
-        self.actionQuit.triggered.connect(self.quit)
         self.actionAbout_App.triggered.connect(self.about)
         self.actionAbout_QT.triggered.connect(self.aboutQt)
 
@@ -40,7 +39,7 @@ class Aplikasi_Forensik (QMainWindow, Ui_Aplikasi_Forensik):
         self.browse.clicked.connect(self.save_locations)
 
         self.scanButton.clicked.connect(self.dialog_scan)
-        self.cekButton.clicked.connect(self.check_button)
+        self.checkButton.clicked.connect(self.check_button)
 
         self.activity_model = QStringListModel()
         self.viewData.setModel(self.activity_model)
@@ -89,10 +88,6 @@ class Aplikasi_Forensik (QMainWindow, Ui_Aplikasi_Forensik):
                 self, "Error", "Mohon pilih file gambar dan lokasi penyimpanan terlebih dahulu!")
 
         self.extractButton.setEnabled(True)
-
-    #* Fungsi untuk keluar dari aplikasi
-    def quit(self):
-        self.app.quit()
 
     #* Fungsi untuk menampilkan informasi tentang aplikasi
     def about(self):
