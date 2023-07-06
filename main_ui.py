@@ -124,9 +124,13 @@ class Ui_Aplikasi_Forensik(object):
         self.imageType = QLabel(self.destinationFile_2)
         self.imageType.setObjectName(u"imageType")
         self.imageType.setGeometry(QRect(50, 30, 151, 20))
+        self.myRadioButton = QRadioButton()
+        self.myRadioButton = QRadioButton("File hasil adalah Text")
         self.text = QRadioButton(self.destinationFile_2)
         self.text.setObjectName(u"text")
         self.text.setGeometry(QRect(203, 33, 51, 16))
+        self.MyCheckBox = QCheckBox()
+        self.MyCheckBox = QCheckBox("Penyimpanan Local")
         self.internal = QCheckBox(self.destinationFile_2)
         self.internal.setObjectName(u"internal")
         self.internal.setGeometry(QRect(271, 31, 61, 20))
@@ -157,7 +161,7 @@ class Ui_Aplikasi_Forensik(object):
     # setupUi
 
     def retranslateUi(self, Aplikasi_Forensik):
-        Aplikasi_Forensik.setWindowTitle(QCoreApplication.translate("Aplikasi_Forensik", u"MainWindow", None))
+        Aplikasi_Forensik.setWindowTitle(QCoreApplication.translate("Aplikasi_Forensik", u"Aplikasi_Forensik", None))
         self.actionSave.setText(QCoreApplication.translate("Aplikasi_Forensik", u"Save", None))
         self.actionSave_As.setText(QCoreApplication.translate("Aplikasi_Forensik", u"Save As", None))
         self.actionQuit.setText(QCoreApplication.translate("Aplikasi_Forensik", u"Quit", None))
