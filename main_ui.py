@@ -1,27 +1,9 @@
-# -*- coding: utf-8 -*-
-
-################################################################################
-## Form generated from reading UI file 'main.ui'
-##
-## Created by: Qt User Interface Compiler version 6.4.2
-##
-## WARNING! All changes made in this file will be lost when recompiling UI file!
-################################################################################
-
-from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
-    QMetaObject, QObject, QPoint, QRect,
-    QSize, QTime, QUrl, Qt)
-from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
-    QCursor, QFont, QFontDatabase, QGradient,
-    QIcon, QImage, QKeySequence, QLinearGradient,
-    QPainter, QPalette, QPixmap, QRadialGradient,
-    QTransform)
-from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QGroupBox,
-    QLabel, QLineEdit, QListView, QMainWindow,
-    QMenu, QMenuBar, QProgressBar, QPushButton,
-    QRadioButton, QSizePolicy, QStatusBar, QToolButton,
-    QWidget)
+from PySide6.QtCore import QCoreApplication, QMetaObject, QRect, QSize
+from PySide6.QtGui import QAction, QIcon
+from PySide6.QtWidgets import (QCheckBox, QComboBox, QGroupBox, QLabel, QLineEdit, QListView,
+                               QMenu, QMenuBar, QProgressBar, QPushButton, QRadioButton, QStatusBar, QToolButton, QWidget)
 import resource_rc
+
 
 class Ui_Aplikasi_Forensik(object):
     def setupUi(self, Aplikasi_Forensik):
@@ -31,24 +13,28 @@ class Ui_Aplikasi_Forensik(object):
         self.actionSave = QAction(Aplikasi_Forensik)
         self.actionSave.setObjectName(u"actionSave")
         icon = QIcon()
-        icon.addFile(u":/images/images/folderIcon.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(u":/images/images/folderIcon.png",
+                     QSize(), QIcon.Normal, QIcon.Off)
         self.actionSave.setIcon(icon)
         self.actionSave_As = QAction(Aplikasi_Forensik)
         self.actionSave_As.setObjectName(u"actionSave_As")
         self.actionQuit = QAction(Aplikasi_Forensik)
         self.actionQuit.setObjectName(u"actionQuit")
         icon1 = QIcon()
-        icon1.addFile(u":/images/images/quitIcon.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon1.addFile(u":/images/images/quitIcon.png",
+                      QSize(), QIcon.Normal, QIcon.Off)
         self.actionQuit.setIcon(icon1)
         self.actionAbout_App = QAction(Aplikasi_Forensik)
         self.actionAbout_App.setObjectName(u"actionAbout_App")
         icon2 = QIcon()
-        icon2.addFile(u":/images/images/aboutIcon.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon2.addFile(u":/images/images/aboutIcon.png",
+                      QSize(), QIcon.Normal, QIcon.Off)
         self.actionAbout_App.setIcon(icon2)
         self.actionAbout_QT = QAction(Aplikasi_Forensik)
         self.actionAbout_QT.setObjectName(u"actionAbout_QT")
         icon3 = QIcon()
-        icon3.addFile(u":/images/images/aboutQtIcon.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon3.addFile(u":/images/images/aboutQtIcon.png",
+                      QSize(), QIcon.Normal, QIcon.Off)
         self.actionAbout_QT.setIcon(icon3)
         self.centralwidget = QWidget(Aplikasi_Forensik)
         self.centralwidget.setObjectName(u"centralwidget")
@@ -62,13 +48,15 @@ class Ui_Aplikasi_Forensik(object):
         self.okButton.setObjectName(u"okButton")
         self.okButton.setGeometry(QRect(650, 400, 93, 28))
         icon4 = QIcon()
-        icon4.addFile(u":/images/images/checkIcon.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon4.addFile(u":/images/images/checkIcon.png",
+                      QSize(), QIcon.Normal, QIcon.Off)
         self.okButton.setIcon(icon4)
         self.extractButton = QPushButton(self.centralwidget)
         self.extractButton.setObjectName(u"extractButton")
         self.extractButton.setGeometry(QRect(770, 400, 93, 28))
         icon5 = QIcon()
-        icon5.addFile(u":/images/images/extractIcon.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon5.addFile(u":/images/images/extractIcon.png",
+                      QSize(), QIcon.Normal, QIcon.Off)
         self.extractButton.setIcon(icon5)
         self.Input = QGroupBox(self.centralwidget)
         self.Input.setObjectName(u"Input")
@@ -161,34 +149,61 @@ class Ui_Aplikasi_Forensik(object):
     # setupUi
 
     def retranslateUi(self, Aplikasi_Forensik):
-        Aplikasi_Forensik.setWindowTitle(QCoreApplication.translate("Aplikasi_Forensik", u"Aplikasi_Forensik", None))
-        self.actionSave.setText(QCoreApplication.translate("Aplikasi_Forensik", u"Save", None))
-        self.actionSave_As.setText(QCoreApplication.translate("Aplikasi_Forensik", u"Save As", None))
-        self.actionQuit.setText(QCoreApplication.translate("Aplikasi_Forensik", u"Quit", None))
-        self.actionAbout_App.setText(QCoreApplication.translate("Aplikasi_Forensik", u"About App", None))
-        self.actionAbout_QT.setText(QCoreApplication.translate("Aplikasi_Forensik", u"About QT", None))
-        self.scanButton.setText(QCoreApplication.translate("Aplikasi_Forensik", u"Scan", None))
-        self.checkButton.setText(QCoreApplication.translate("Aplikasi_Forensik", u"Check", None))
-        self.okButton.setText(QCoreApplication.translate("Aplikasi_Forensik", u"Oke", None))
-        self.extractButton.setText(QCoreApplication.translate("Aplikasi_Forensik", u"Extract", None))
-        self.Input.setTitle(QCoreApplication.translate("Aplikasi_Forensik", u"Input", None))
-        self.fileName.setText(QCoreApplication.translate("Aplikasi_Forensik", u"File Name   :", None))
-        self.searchFile.setText(QCoreApplication.translate("Aplikasi_Forensik", u"...", None))
-        self.examiner.setText(QCoreApplication.translate("Aplikasi_Forensik", u"Examiner    :", None))
-        self.outputLocation.setText(QCoreApplication.translate("Aplikasi_Forensik", u"Output Location :", None))
-        self.browse.setText(QCoreApplication.translate("Aplikasi_Forensik", u"Browse", None))
-        self.acquisitionProgress.setText(QCoreApplication.translate("Aplikasi_Forensik", u"Acquisition Progress    :", None))
-        self.detectDevice.setItemText(0, QCoreApplication.translate("Aplikasi_Forensik", u"Redmi Note 4", None))
-        self.detectDevice.setItemText(1, QCoreApplication.translate("Aplikasi_Forensik", u"Samsung Galaxy J1 Ace", None))
-        self.detectDevice.setItemText(2, QCoreApplication.translate("Aplikasi_Forensik", u"Redmi Note 8", None))
+        Aplikasi_Forensik.setWindowTitle(QCoreApplication.translate(
+            "Aplikasi_Forensik", u"Aplikasi_Forensik", None))
+        self.actionSave.setText(QCoreApplication.translate(
+            "Aplikasi_Forensik", u"Save", None))
+        self.actionSave_As.setText(QCoreApplication.translate(
+            "Aplikasi_Forensik", u"Save As", None))
+        self.actionQuit.setText(QCoreApplication.translate(
+            "Aplikasi_Forensik", u"Quit", None))
+        self.actionAbout_App.setText(QCoreApplication.translate(
+            "Aplikasi_Forensik", u"About App", None))
+        self.actionAbout_QT.setText(QCoreApplication.translate(
+            "Aplikasi_Forensik", u"About QT", None))
+        self.scanButton.setText(QCoreApplication.translate(
+            "Aplikasi_Forensik", u"Scan", None))
+        self.checkButton.setText(QCoreApplication.translate(
+            "Aplikasi_Forensik", u"Check", None))
+        self.okButton.setText(QCoreApplication.translate(
+            "Aplikasi_Forensik", u"Oke", None))
+        self.extractButton.setText(QCoreApplication.translate(
+            "Aplikasi_Forensik", u"Extract", None))
+        self.Input.setTitle(QCoreApplication.translate(
+            "Aplikasi_Forensik", u"Input", None))
+        self.fileName.setText(QCoreApplication.translate(
+            "Aplikasi_Forensik", u"File Name   :", None))
+        self.searchFile.setText(QCoreApplication.translate(
+            "Aplikasi_Forensik", u"...", None))
+        self.examiner.setText(QCoreApplication.translate(
+            "Aplikasi_Forensik", u"Examiner    :", None))
+        self.outputLocation.setText(QCoreApplication.translate(
+            "Aplikasi_Forensik", u"Output Location :", None))
+        self.browse.setText(QCoreApplication.translate(
+            "Aplikasi_Forensik", u"Browse", None))
+        self.acquisitionProgress.setText(QCoreApplication.translate(
+            "Aplikasi_Forensik", u"Acquisition Progress    :", None))
+        self.detectDevice.setItemText(0, QCoreApplication.translate(
+            "Aplikasi_Forensik", u"Redmi Note 4", None))
+        self.detectDevice.setItemText(1, QCoreApplication.translate(
+            "Aplikasi_Forensik", u"Samsung Galaxy J1 Ace", None))
+        self.detectDevice.setItemText(2, QCoreApplication.translate(
+            "Aplikasi_Forensik", u"Redmi Note 8", None))
 
-        self.resultCek.setText(QCoreApplication.translate("Aplikasi_Forensik", u"Result :", None))
-        self.result.setText(QCoreApplication.translate("Aplikasi_Forensik", u"Not Root!", None))
-        self.destinationFile_2.setTitle(QCoreApplication.translate("Aplikasi_Forensik", u"Output", None))
-        self.imageType.setText(QCoreApplication.translate("Aplikasi_Forensik", u"File Type and Storage  : ", None))
-        self.text.setText(QCoreApplication.translate("Aplikasi_Forensik", u".txt", None))
-        self.internal.setText(QCoreApplication.translate("Aplikasi_Forensik", u"Local", None))
-        self.detailData.setTitle(QCoreApplication.translate("Aplikasi_Forensik", u"Details", None))
-        self.menuAbout.setTitle(QCoreApplication.translate("Aplikasi_Forensik", u"About", None))
+        self.resultCek.setText(QCoreApplication.translate(
+            "Aplikasi_Forensik", u"Result :", None))
+        self.result.setText(QCoreApplication.translate(
+            "Aplikasi_Forensik", u"Not Root!", None))
+        self.destinationFile_2.setTitle(
+            QCoreApplication.translate("Aplikasi_Forensik", u"Output", None))
+        self.imageType.setText(QCoreApplication.translate(
+            "Aplikasi_Forensik", u"File Type and Storage  : ", None))
+        self.text.setText(QCoreApplication.translate(
+            "Aplikasi_Forensik", u".txt", None))
+        self.internal.setText(QCoreApplication.translate(
+            "Aplikasi_Forensik", u"Local", None))
+        self.detailData.setTitle(QCoreApplication.translate(
+            "Aplikasi_Forensik", u"Details", None))
+        self.menuAbout.setTitle(QCoreApplication.translate(
+            "Aplikasi_Forensik", u"About", None))
     # retranslateUi
-
