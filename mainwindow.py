@@ -180,7 +180,6 @@ jumper = 10
 
 # ==> SPLASHSCREEN WINDOW
 
-
 class SplashScreen(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
@@ -189,13 +188,8 @@ class SplashScreen(QMainWindow):
 
         # ==> SET INITIAL PROGRESS BAR TO (0) ZERO
         self.progressBarValue(0)
-
-        # ==> REMOVE STANDARD TITLE BAR
-        self.setWindowFlags(QtCore.Qt.FramelessWindowHint)  # Remove title bar
-        # Set background to transparent
+        self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
-
-        # ==> APPLY DROP SHADOW EFFECT
         self.shadow = QGraphicsDropShadowEffect(self)
         self.shadow.setBlurRadius(20)
         self.shadow.setXOffset(0)
@@ -208,27 +202,16 @@ class SplashScreen(QMainWindow):
         self.timer.timeout.connect(self.progress)
         # TIMER IN MILLISECONDS
         self.timer.start(20)
-
-        # SHOW ==> MAIN WINDOW
-        ########################
         self.show()
-        ## ==> END ##
 
-    # DEF TO LOADING
-    ####################
     def progress(self):
         global counter
         global jumper
         value = counter
-
-        # HTML TEXT PERCENTAGE
         htmlText = """<p><span style=" font-size:68pt;">{VALUE}</span><span style=" font-size:58pt; vertical-align:super;">%</span></p>"""
-
-        # REPLACE VALUE
         newHtml = htmlText.replace("{VALUE}", str(jumper))
 
         if(value > jumper):
-            # APPLY NEW PERCENTAGE TEXT
             self.ui.labelPercentage.setText(newHtml)
             jumper += 10
 
@@ -238,26 +221,15 @@ class SplashScreen(QMainWindow):
             value = 1.000
         self.progressBarValue(value)
 
-        # CLOSE SPLASH SCREE AND OPEN APP
         if counter > 101:
             # STOP TIMER
             self.timer.stop()
 
-            # SHOW MAIN WINDOW
-            # self.main = MainWindow()
-            # self.main.show()
-
             # CLOSE SPLASH SCREEN
             self.close()
-
-        # INCREASE COUNTER
         counter += 0.5
 
-    # DEF PROGRESS BAR VALUE
-    #########################
     def progressBarValue(self, value):
-
-        # PROGRESSBAR STYLESHEET BASE
         styleSheet = """
         QFrame{
         	border-radius: 150px;
@@ -268,15 +240,9 @@ class SplashScreen(QMainWindow):
         # GET PROGRESS BAR VALUE, CONVERT TO FLOAT AND INVERT VALUES
         # stop works of 1.000 to 0.000
         progress = (100 - value) / 100.0
-
-        # GET NEW VALUES
         stop_1 = str(progress - 0.001)
         stop_2 = str(progress)
-
-        # SET VALUES TO NEW STYLESHEET
         newStylesheet = styleSheet.replace(
             "{STOP_1}", stop_1).replace("{STOP_2}", stop_2)
-
-        # APPLY STYLESHEET WITH NEW VALUES
         self.ui.circularProgress.setStyleSheet(newStylesheet)
     # ENG = 'eng'
