@@ -63,7 +63,7 @@ class Aplikasi_Forensik (QMainWindow, Ui_Aplikasi_Forensik):
     # * Fungsi untuk menampilkan informasi tentang aplikasi
     def about(self):
         QMessageBox.information(
-            self, "Aplikasi Forensik", "Aplikasi ini hanya bisa digunakan untuk kepentingan akuisisi data!")
+            self, "Aplikasi Forensik", "Aplikasi ini hanya bisa digunakan untuk kepentingan ekstraksi data!")
 
     # * Fungsi untuk menampilkan informasi tentang QT
     def aboutQt(self):
